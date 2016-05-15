@@ -1,0 +1,111 @@
+Rancangan Database E-Learning
+
+# Author	: nurodigital
+# Created at	: May 2016
+# Contact	: ahmad.uji1902@gmail.com
+# Github	: https://github.com/UjiAhmadFauzi
+# Website	: http://nurodigital.com
+
+# nurodigital_siswa ###################################################################################################################################
+
+id_siswa	int, uuid, 20		primary			auto increments
+email		varchar, 30		
+nama		varchar, 30		
+username	varchar, 30		
+password	varchar, 30		md5, sha1
+image		text
+kelas_id	int, 1			foreign key
+jurusan_id	int, 1			foreign key
+created_at	timestamp
+status		enum			"Aktif", "Tidak Aktif"				default "Tidak Aktif"
+
+# nurodigital_mapel ###################################################################################################################################
+
+id_mapel	int, 10
+mapel		varchar, 50
+created_at	timestamp
+
+#nurodigital_ujian ####################################################################################################################################
+
+id_ujian	char, uuid non -, 20	
+soal_id		int, 20
+mapel_id	int, 10
+kelas_id	int, 1
+jurusan_id	int, 1
+waktu		varchar, 30
+created_by	int, 20
+created_at	timestamp
+status		enum			"Aktif","Tidak Aktif"
+
+# nurodigital_soal ####################################################################################################################################
+
+id_soal		char, uuid non -, 20	primary			auto increments
+soal		text
+image_soal	text			
+jenis_soal	enum			"PG", "Essay"					default "-"
+pg_a		text
+pg_a_image	text									default "-"
+pg_b		text
+pg_b_image	text									default "-"
+pg_c		text
+pg_c_image	text									default "-"
+pg_d		text
+pg_d_image	text									default "-"
+pg_e		text
+pg_e_image	text
+jawaban_benar	enum			"a","b","c","d","e"						default "-"
+mapel_id	int, 10
+created_at	timestamp
+created_by	int, 20									ambil data dari id_guru
+status		enum			"Aktif","Tidak Aktif"				default "Tidak Aktif"
+
+# nurodigital_guru ####################################################################################################################################
+
+id_guru		int, uuid, 20		primary			auto increments
+nama		varchar, 30
+email		varchar, 30
+username	varchar, 30		md5, sha1, uuid					supported by code (base64_encode, ci hash)
+password	varchar, 30		md5, sha1, uuid					supported by code (base64_encode, ci hash)
+mapel_id	int, 1
+created_at	timestamp
+status		enum			"Aktif", "Tidak Aktif"				default "Tidak Aktif"
+
+# nurodigital_jawaban #################################################################################################################################
+
+id_jawaban	int, uuid, 20		primary			auto increments
+siswa_id	int, 20			foreign key
+kelas_id	int, 1			foreign key
+jurusan_id	int, 1			foreign key
+mapel_id	int, 10			foreign key
+soal_id		int, 20			foreign key
+jawaban_pg	enum			"a","b","c","d","e"				default "-"
+jawaban_essay	text									default "-"
+lama_mengerjakanvarchar	
+started_at
+ended_at		
+created_at	timestamp
+
+
+# nurodigital_kelas ###################################################################################################################################
+
+id_kelas	int, 1			primary			auto increments
+kelas		int, 2
+created_at	timestamp
+
+
+# nurodigital_jurusan #################################################################################################################################
+
+id_jurusan	int, 1			primary			auto increments
+jurusan		varchar, 30
+created_at	timestamp
+
+
+# nurodigital_log_history #############################################################################################################################
+
+id_log_history	int, uuid, 20
+ip_address	varchar, 50
+siswa_id	int, 1			foreign key		
+timestamp	timestamp
+browser_uses	varchar, 50
+
+
