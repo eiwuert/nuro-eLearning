@@ -94,3 +94,8 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
+// $db['development']['hostname'] = 'mysql:host=localhost';
+// $db['development']['dbdriver'] = 'pdo';
+//
+// $db['staging']['hostname'] = 'mysql:host=localhost';
+// $db['staging']['dbdriver'] = 'pdo';

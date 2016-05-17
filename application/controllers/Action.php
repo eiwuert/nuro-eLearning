@@ -24,11 +24,4 @@ class Action extends CI_Controller
     $this->session->sess_destroy();
     redirect();
   }
-
-  public function tes() {
-    $query = $this->db->query("SELECT * FROM nurodigital_siswa");
-    $num = $query->num_rows();
-
-    echo $num;
-  }
 }
