@@ -22,9 +22,6 @@
           minlength: "harus 2"
         }
       },
-      submitHandler: function(form) {
-        alert('valid');
-      },
       errorElement: 'span',
       errorLabelContainer: '.error'
     });
