@@ -66,7 +66,7 @@ class Nurodigital extends CI_Model
   //       $config['smtp_host'] = 'smtp.gmail.com'; //smtp host name
   //       $config['smtp_port'] = '465'; //smtp port number
   //       $config['smtp_user'] = $from_email;
-  //       $config['smtp_pass'] = '081318260540'; //$from_email password
+  //       $config['smtp_pass'] = 'upsupsups'; //$from_email password
   //       $config['mailtype'] = 'html';
   //       $config['charset'] = 'iso-8859-1';
   //       $config['wordwrap'] = TRUE;
@@ -99,7 +99,7 @@ class Nurodigital extends CI_Model
     $config['smtp_timeout'] = '7';
     $config['smtp_port'] = '465'; //smtp port number
     $config['smtp_user'] = $from_email;
-    $config['smtp_pass'] = '081318260540'; //$from_email password
+    $config['smtp_pass'] = 'upsupsups'; //$from_email password
     // $config['charset']    = 'utf-8';
     $config['mailtype'] = 'html';
     $config['charset'] = 'iso-8859-1';
