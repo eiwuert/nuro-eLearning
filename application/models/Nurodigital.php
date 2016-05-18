@@ -18,10 +18,15 @@ class Nurodigital extends CI_Model
     $r = $que->row();
 
     if ($n_row === 1) {
-      if ($r->status == "Aktif") {
+      if ($r->status == "Aktif" /*&& $r->banned_stat == "N"*/) {
         $this->sessionData($r);
-      } else {
-        $this->session->set_flashdata(md5('notification'), "Akun Anda tidak aktif, silahkan hubungi bidang kesiswaan");
+      }
+      // else if ($r->banned_stat == "Y") {
+      //   $this->session->set_flashdata(md5('notification'), "Akun Anda telah dinonaktifkan oleh Admin, silahkan hubungi bidang kesiswaan");
+      //   redirect('/url/login');
+      // }
+      else {
+        $this->session->set_flashdata(md5('notification'), "Akun Anda belum diverifikasi, silahkan verifikasi akun Anda terlebih dahulu");
         redirect('/url/login');
       }
     } else {
@@ -50,27 +55,29 @@ class Nurodigital extends CI_Model
   }
 
   public function prosesInsert($data) {
-    // $id = 'UUID()';
-    // $this->db->set('id_siswa', str_replace('-','',$id), FALSE);
+    $this->load->library('uuid');
+    $id = $this->uuid->v4();
+    $id = str_replace('-','',$this->uuid->v4());
+    $this->db->set('id_siswa', $id);
     return $this->db->insert('nurodigital_siswa', $data);
   }
 
   // function sendMail($to_email) {
   //       $this->load->library('email');
-  //       $from_email = 'ahmad.uji08@gmail.com'; //change this to yours
+  //       $from_email = 'ahmad.uji08@gmail.com';
   //       $subject = 'Verify Your Email Address';
   //       $message = 'Dear User,<br /><br />Please click on the below activation link to verify your email address.<br /><br /> http://www.mydomain.com/user/verify/' . md5($to_email) . '<br /><br /><br />Thanks<br />Mydomain Team';
   //
   //       //configure email settings
   //       $config['protocol'] = 'smtp';
-  //       $config['smtp_host'] = 'smtp.gmail.com'; //smtp host name
-  //       $config['smtp_port'] = '465'; //smtp port number
+  //       $config['smtp_host'] = 'smtp.gmail.com';
+  //       $config['smtp_port'] = '465';
   //       $config['smtp_user'] = $from_email;
-  //       $config['smtp_pass'] = 'ups'; //$from_email password
+  //       $config['smtp_pass'] = 'ups';
   //       $config['mailtype'] = 'html';
   //       $config['charset'] = 'iso-8859-1';
   //       $config['wordwrap'] = TRUE;
-  //       // $config['newline'] = "\r\n"; //use double quotes
+  //       // $config['newline'] = "\r\n";
   //       $this->email->initialize($config);
   //
   //       //send mail
@@ -84,7 +91,7 @@ class Nurodigital extends CI_Model
   // }
 
   public function send($email,$nama) {
-    $from_email = 'ahmad.uji08@gmail.com'; //change this to yours
+    $from_email = 'ahmad.uji08@gmail.com';
     $subject = 'Verify Your Email Address';
     $message = 'Dear '. $nama .',<br /><br />
                 Please click on the below activation link to verify your email address.<br /><br />
@@ -92,14 +99,12 @@ class Nurodigital extends CI_Model
                 Thanks<br />
                 Ahmad Fauzi';
 
-
-    //configure email settings
     $config['protocol'] = 'smtp';
-    $config['smtp_host'] = 'ssl://smtp.gmail.com'; //smtp host name
+    $config['smtp_host'] = 'ssl://smtp.gmail.com';
     $config['smtp_timeout'] = '7';
-    $config['smtp_port'] = '465'; //smtp port number
+    $config['smtp_port'] = '465';
     $config['smtp_user'] = $from_email;
-    $config['smtp_pass'] = 'ups'; //$from_email password
+    $config['smtp_pass'] = '081318260540';
     // $config['charset']    = 'utf-8';
     $config['mailtype'] = 'html';
     $config['charset'] = 'iso-8859-1';
@@ -109,12 +114,11 @@ class Nurodigital extends CI_Model
     // $config['newline'] = "\r\n"; //use double quotes
     $this->email->initialize($config);
 
-    //send mail
-    $this->email->from($from_email, 'Ahmad Fauzi');
+    $this->email->from($from_email, 'nuroe-Learning');
     $this->email->to($email);
     $this->email->subject($subject);
     $this->email->message($message);
-    $this->email->send();
+    return $this->email->send();
   }
 
   function verifyEmail($key) {

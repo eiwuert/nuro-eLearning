@@ -21,12 +21,16 @@ class Action extends CI_Controller
     $this->nurodigital->actLogin($username, $password);
   }
 
-  public function dest() {
+  public function dest_session() {
     $this->session->sess_destroy();
     redirect();
   }
 
   public function addUser() {
+    // $this->load->library('uuid');
+    // $id = $this->uuid->v4();
+    // $id = str_replace('-','',$id);
+    // $this->db->set('id_siswa', $id, FALSE);
     $data = array(
       'nama'      => $this->input->post('nama'),
       'email'     => $this->input->post('email'),
@@ -37,10 +41,10 @@ class Action extends CI_Controller
 
     if ($this->nurodigital->prosesInsert($data)) {
       if ($this->nurodigital->send($this->input->post('email'),$this->input->post('nama'))) {
-        $this->session->set_flashdata(md5('notification'), "Anda berhasil melakukan registrasi, silahkan periksa email anda untuk mengaktifkan akun yang baru anda buat");
+        $this->session->set_flashdata(md5('sukses'), "Anda berhasil melakukan registrasi, silahkan periksa pesan masuk email Anda untuk mengaktifkan akun yang baru Anda buat");
         redirect('/url/login');
       } else {
-        $this->session->set_flashdata(md5('notification'), "Error, silahkan coba lagi!");
+        $this->session->set_flashdata(md5('notification'), "Terjadi kesalahan dalam melakukan registrasi, silahkan coba lagi!");
         redirect('/url/register');
       }
     }
@@ -48,10 +52,10 @@ class Action extends CI_Controller
 
   function verify($hash=NULL) {
     if ($this->nurodigital->verifyEmail($hash)) {
-      $this->session->set_flashdata(md5('notification'), "Email address verified!");
+      $this->session->set_flashdata(md5('sukses'), "Email sukses diverifikasi!");
       redirect('/url/login');
     } else {
-      $this->session->set_flashdata(md5('notification'), "Email gagal terferifikasi");
+      $this->session->set_flashdata(md5('notification'), "Email gagal terverifikasi");
       redirect('/url/register');
     }
   }

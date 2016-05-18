@@ -43,11 +43,15 @@
      <div class="row">
      <form id="loginv" class="col s12" action="<?=base_url('action/cekLogin')?>" method="post">
        <!--   action="<?=base_url('action/cekLogin')?>" -->
-       <?php if ($this->session->userdata(md5('notification'))): ?>
+       <?php if ($this->session->userdata(md5('notification'))) { ?>
          <div class="" style="text-align:center;background-color:#ee6e73;width:100%;padding:10px;color:#fff">
            <?=$this->session->flashdata(md5('notification'))?>
          </div><br><br>
-       <?php endif; ?>
+       <?php } else if ($this->session->userdata(md5('sukses'))) { ?>
+         <div class="" style="text-align:center;background-color:#26a69a;width:100%;padding:10px;color:#fff">
+           <?=$this->session->flashdata(md5('sukses'))?>
+         </div><br><br>
+       <?php } ?>
 
 
        <div class="row">
