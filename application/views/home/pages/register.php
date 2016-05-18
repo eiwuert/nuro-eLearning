@@ -63,6 +63,12 @@
      </div>
      <br>
      <form id="regisv" action="<?=base_url('action/addUser')?>" method="post">
+       <!--   action="<?=base_url('action/cekLogin')?>" -->
+       <?php if ($this->session->userdata(md5('notification'))): ?>
+         <div class="" style="text-align:center;background-color:#ee6e73;width:100%;padding:10px;color:#fff">
+           <?=$this->session->flashdata(md5('notification'))?>
+         </div><br><br>
+       <?php endif; ?>
       <div class="row">
         <div class="input-field col s12">
           <input placeholder="Nama Lengkap" id="nama" name="nama" type="text" class="validate">

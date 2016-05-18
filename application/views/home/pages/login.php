@@ -5,21 +5,21 @@
       rules: {
         username: {
           required: true,
-          minlength: 2
+          minlength: 10
         },
         password: {
           required: true,
-          minlength: 2
+          minlength: 10
         }
       },
       messages: {
         username :{
-          required: "harus diisi ngehe jancok asu",
-          minlength: "harus 2"
+          required: "Username harus diisi",
+          minlength: "Harus lebih dari 10 karakter"
         },
         password: {
-          required: "harus diisi cok",
-          minlength: "harus 2"
+          required: "Password harus diisi",
+          minlength: "Harus lebih dari 10 karakter"
         }
       },
       errorElement: 'span',
