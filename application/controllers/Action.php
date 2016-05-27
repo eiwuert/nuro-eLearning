@@ -27,10 +27,6 @@ class Action extends CI_Controller
   }
 
   public function addUser() {
-    // $this->load->library('uuid');
-    // $id = $this->uuid->v4();
-    // $id = str_replace('-','',$id);
-    // $this->db->set('id_siswa', $id, FALSE);
     $data = array(
       'nama'      => $this->input->post('nama'),
       'email'     => $this->input->post('email'),
@@ -38,8 +34,8 @@ class Action extends CI_Controller
       'password'  => md5($this->input->post('password')),
       'image'     => $this->input->post('image')
     );
-
-    if ($this->checkEmailExist($this->input->post('email'))) {
+    //
+    if ($this->checkEmailExist($this->input->post('email'))==TRUE) {
       if ($this->nurodigital->prosesInsert($data)) {
         if ($this->nurodigital->send($this->input->post('email'),$this->input->post('nama'))) {
           $this->session->set_flashdata(md5('sukses'), "Anda berhasil melakukan registrasi, silahkan periksa pesan masuk email Anda untuk mengaktifkan akun yang baru Anda buat");
@@ -53,13 +49,14 @@ class Action extends CI_Controller
       $this->session->set_flashdata(md5('notification'), "Email sudah digunakan");
       redirect('/url/register');
     }
+
   }
 
   function checkEmailExist($email) {
-    if ($this->nurodigital->checkEmail($email)) {
-      return true;
+    if ($this->nurodigital->checkEmail($email)==TRUE) {
+      return TRUE;
     } else {
-      return false;
+      return FALSE;
     }
   }
 

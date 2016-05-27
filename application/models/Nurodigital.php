@@ -63,13 +63,12 @@ class Nurodigital extends CI_Model
   }
 
   public function checkEmail($email) {
-    // $query = $this->db->get_where('nurodigital_siswa', array('email' => $email));
     $query = $this->db->get_where('nurodigital_siswa', array('email' => $email));
-
-    if ($query->num_rows() > 0) {
-      return false;
+    $n_rows = $query->num_rows();
+    if ($n_rows === 0) {
+      return TRUE;
     } else {
-      return true;
+      return FALSE;
     }
   }
 
@@ -115,7 +114,7 @@ class Nurodigital extends CI_Model
     $config['smtp_timeout'] = '7';
     $config['smtp_port'] = '465';
     $config['smtp_user'] = $from_email;
-    $config['smtp_pass'] = 'papapapa';
+    $config['smtp_pass'] = 'pass';
     // $config['charset']    = 'utf-8';
     $config['mailtype'] = 'html';
     $config['charset'] = 'iso-8859-1';
@@ -123,12 +122,13 @@ class Nurodigital extends CI_Model
     $config['newline'] = "\r\n";
     $config['crlf'] = "\r\n";
     // $config['newline'] = "\r\n"; //use double quotes
-    $this->email->initialize($confdig);
+    $this->email->initialize($config);
 
     $this->email->from($from_email, 'nuroe-Learning');
     $this->email->to($email);
     $this->email->subject($subject);
     $this->email->message($message);
+    // echo $this->email->print_debugger();
     return $this->email->send();
   }
 
