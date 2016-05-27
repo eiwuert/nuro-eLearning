@@ -62,6 +62,17 @@ class Nurodigital extends CI_Model
     return $this->db->insert('nurodigital_siswa', $data);
   }
 
+  public function checkEmail($email) {
+    // $query = $this->db->get_where('nurodigital_siswa', array('email' => $email));
+    $query = $this->db->get_where('nurodigital_siswa', array('email' => $email));
+
+    if ($query->num_rows() > 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   // function sendMail($to_email) {
   //       $this->load->library('email');
   //       $from_email = 'ahmad.uji08@gmail.com';
@@ -104,7 +115,7 @@ class Nurodigital extends CI_Model
     $config['smtp_timeout'] = '7';
     $config['smtp_port'] = '465';
     $config['smtp_user'] = $from_email;
-    $config['smtp_pass'] = '081318260540';
+    $config['smtp_pass'] = 'papapapa';
     // $config['charset']    = 'utf-8';
     $config['mailtype'] = 'html';
     $config['charset'] = 'iso-8859-1';

@@ -39,14 +39,27 @@ class Action extends CI_Controller
       'image'     => $this->input->post('image')
     );
 
-    if ($this->nurodigital->prosesInsert($data)) {
-      if ($this->nurodigital->send($this->input->post('email'),$this->input->post('nama'))) {
-        $this->session->set_flashdata(md5('sukses'), "Anda berhasil melakukan registrasi, silahkan periksa pesan masuk email Anda untuk mengaktifkan akun yang baru Anda buat");
-        redirect('/url/login');
-      } else {
-        $this->session->set_flashdata(md5('notification'), "Terjadi kesalahan dalam melakukan registrasi, silahkan coba lagi!");
-        redirect('/url/register');
+    if ($this->checkEmailExist($this->input->post('email'))) {
+      if ($this->nurodigital->prosesInsert($data)) {
+        if ($this->nurodigital->send($this->input->post('email'),$this->input->post('nama'))) {
+          $this->session->set_flashdata(md5('sukses'), "Anda berhasil melakukan registrasi, silahkan periksa pesan masuk email Anda untuk mengaktifkan akun yang baru Anda buat");
+          redirect('/url/login');
+        } else {
+          $this->session->set_flashdata(md5('notification'), "Terjadi kesalahan dalam melakukan registrasi, silahkan coba lagi!");
+          redirect('/url/register');
+        }
       }
+    } else {
+      $this->session->set_flashdata(md5('notification'), "Email sudah digunakan");
+      redirect('/url/register');
+    }
+  }
+
+  function checkEmailExist($email) {
+    if ($this->nurodigital->checkEmail($email)) {
+      return true;
+    } else {
+      return false;
     }
   }
 
