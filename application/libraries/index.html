@@ -5,6 +5,47 @@
 </head>
 <body>
 
+<style media="screen">
+.footer-container {
+width:100%;
+background:#333;
+clear: both;
+position: relative;
+z-index: 10;
+}
+.footer-row { margin-top: 30px;}
+.footer-col {color:#ababab; font-size: 11px;}
+.footer-col a {color:#dcdcdc; font-weight: bold;}
+.footer-col a:hover {color:#d8450b; text-decoration: none;}
+.footer-col h5, .footer-col strong {color:#f9f9f9; text-shadow:none;}
+.footer-col h5 {margin-bottom: 25px;}
+.footer-col ul {margin: 0px;}
+.footer-col ul li {list-style: none; padding-bottom: 20px;}
+.footer-col ul.post-list li {
+border-bottom: 1px dashed #504f4f;
+padding: 10px 0px;
+}
+/* All Mobile Sizes */
+@media only screen and (max-width: 767px) {
+.footer-col {
+clear:both;
+overflow: auto;
+margin-bottom: 20px;
+}
+.footer-sub .right {display: none;}
+}
+ul.img-feed li {
+float: left;
+margin: 0px 7px 7px 0px;
+padding-bottom: 0px;
+}
+
+/* Portrait tablet */
+@media (min-width: 768px) and (max-width: 979px) {
+ul.img-feed li:nth-last-child(-n+4) {display: none;}
+}
+</style>
+
 <p>Directory access is forbidden.</p>
 
 </body>

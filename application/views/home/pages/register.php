@@ -13,11 +13,11 @@
         },
         username: {
           required: true,
-          minlength: 10
+          minlength: 5
         },
         password: {
           required: true,
-          minlength: 10
+          minlength: 5
         },
         image: {
           required: true
@@ -34,11 +34,11 @@
         },
         username: {
           required: "Username harus diisi",
-          minlength: "Minimal username harus 10 kata"
+          minlength: "Minimal username harus 5 kata"
         },
         password: {
           required: "Password harus diisi",
-          minlength: "Minimal password harus 10 kata"
+          minlength: "Minimal password harus 5 kata"
         },
         image: {
           required: "Foto harus diisi"

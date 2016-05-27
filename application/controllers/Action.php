@@ -21,7 +21,7 @@ class Action extends CI_Controller
     $this->nurodigital->actLogin($username, $password);
   }
 
-  public function dest_session() {
+  public function dest() {
     $this->session->sess_destroy();
     redirect();
   }

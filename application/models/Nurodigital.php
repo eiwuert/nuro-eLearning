@@ -112,7 +112,7 @@ class Nurodigital extends CI_Model
     $config['newline'] = "\r\n";
     $config['crlf'] = "\r\n";
     // $config['newline'] = "\r\n"; //use double quotes
-    $this->email->initialize($config);
+    $this->email->initialize($confdig);
 
     $this->email->from($from_email, 'nuroe-Learning');
     $this->email->to($email);
