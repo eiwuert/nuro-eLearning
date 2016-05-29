@@ -72,6 +72,16 @@ class Nurodigital extends CI_Model
     }
   }
 
+  public function chechUsername($username) {
+    $query = $this->db->get_where('nurodigital_siswa', array('username' => $username));
+    $n_rows = $query->num_rows();
+    if ($n_rows === 0) {
+      return TRUE;
+    } else {
+      return FALSE;
+    }
+  }
+
   // function sendMail($to_email) {
   //       $this->load->library('email');
   //       $from_email = 'ahmad.uji08@gmail.com';
@@ -114,7 +124,7 @@ class Nurodigital extends CI_Model
     $config['smtp_timeout'] = '7';
     $config['smtp_port'] = '465';
     $config['smtp_user'] = $from_email;
-    $config['smtp_pass'] = 'pass';
+    $config['smtp_pass'] = 'password';
     // $config['charset']    = 'utf-8';
     $config['mailtype'] = 'html';
     $config['charset'] = 'iso-8859-1';
@@ -128,7 +138,7 @@ class Nurodigital extends CI_Model
     $this->email->to($email);
     $this->email->subject($subject);
     $this->email->message($message);
-    // echo $this->email->print_debugger();
+    // $this->email->print_debugger();
     return $this->email->send();
   }
 
@@ -137,4 +147,34 @@ class Nurodigital extends CI_Model
     $this->db->where('md5(email)', $key);
     return $this->db->update('nurodigital_siswa', $data);
   }
+
+  public function getJurusan() {
+    $query = $this->db->get("nurodigital_jurusan")->result();
+    return $query;
+  }
+
+  function get_all_usernames($username) {
+    $this->db->select('username');
+    $this->db->where('username', $username);
+    $this->db->from('nurodigital_siswa', 1);
+    $query = $this->db->get();
+    if ($query->num_rows() > 0) {
+      return 0;
+    } else {
+      return 1;
+    }
+  }
+
+
+    private function usernameexist($username)
+    {
+      $this->db->select('username');
+    	$this->db->where('username', $username);
+    	$query = $this->db->get('nurodigital_siswa');
+    	if( $query->num_rows() > 0 ) {
+        return TRUE;
+      } else {
+        return FALSE;
+      }
+    }
 }

@@ -80,7 +80,7 @@ $db['default'] = array(
 	'password' => '',
 	'database' => 'ci_nuroelearning',
 	'dbdriver' => 'mysqli',
-	'dbprefix' => '',
+	'dbprefix' => 'nurodigital_',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
 	'cache_on' => FALSE,

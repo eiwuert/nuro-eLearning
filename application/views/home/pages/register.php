@@ -9,11 +9,29 @@
         },
         email: {
           required: true,
-          email: true
+          email: true,
+          remote: {
+            url: "<?=base_url()?>/action/validateEmailExist",
+            type: "post",
+            data: {
+              email: function() {
+                return $("#email").val();
+              }
+            }
+          }
         },
         username: {
           required: true,
-          minlength: 5
+          minlength: 5,
+          remote: {
+            url: "<?=base_url()?>/action/validateUsernameExist",
+            type: "post",
+            data: {
+              username: function() {
+                return $("#username").val();
+              }
+            }
+          }
         },
         password: {
           required: true,
@@ -30,11 +48,13 @@
         },
         email: {
           required: "Email harus diisi",
-          email: "Email harus dalam format alamat email"
+          email: "Email harus dalam format alamat email",
+          remote: "Email telah diambil"
         },
         username: {
           required: "Username harus diisi",
-          minlength: "Minimal username harus 5 kata"
+          minlength: "Minimal username harus 5 kata",
+          remote: "Username telah diambil"
         },
         password: {
           required: "Password harus diisi",
@@ -99,6 +119,30 @@
         <div class="input-field col s12">
           <input placeholder="Password" id="password" name="password" type="text" class="validate">
           <label for="password">Password</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <select>
+            <option value="" disabled selected>Pilih Jurusan</option>
+            <?php foreach ($jurusan as $data) { ?>
+              <option value="<?=$data->id_jurusan;?>"><?=$data->jurusan;?></option>
+            <?php } ?>
+          </select>
+          <label>Jurusan</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <select>
+            <option value="" disabled selected>Pilih Kelas</option>
+            <option value="1">10</option>
+            <option value="2">11</option>
+            <option value="3">12</option>
+          </select>
+          <label>Kelas</label>
         </div>
       </div>
 

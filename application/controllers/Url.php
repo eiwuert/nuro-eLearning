@@ -39,9 +39,10 @@ class Url extends CI_Controller
   }
 
   public function register() {
-    $data['title']  = "Register";
-    $data['st']     = "home";
-    $data['file']   = "register";
+    $data['title']    = "Register";
+    $data['st']       = "home";
+    $data['file']     = "register";
+    $data['jurusan']  = $this->nurodigital->getJurusan();
     $this->nurodigital->getPage($data);
   }
 }
