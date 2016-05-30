@@ -1,7 +1,7 @@
 <div class="navbar-fixed">
   <ul id="dropdown1" class="dropdown-content">
-   <li><a href="<?=site_url('url/setting/')?>/<?=$this->session->userdata('id')?>">Setting</a></li>
-   <li><a href="<?=site_url('action/dest')?>">Logout</a></li>
+   <li><a href="<?=site_url('siswa/setting/')?>/<?=$this->session->userdata('id')?>">Setting</a></li>
+   <li><a href="<?=site_url('siswa/dest')?>">Logout</a></li>
   </ul>
    <nav>
      <div class="container">
@@ -10,17 +10,17 @@
        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
        <ul class="right hide-on-med-and-down">
          <li class="waves-effect"><a href="<?=base_url('')?>">Home</a></li>
-         <li><a href="<?=site_url('url/learning')?>">Learning</a></li>
-         <li><a href="<?=site_url('url/exam')?>">Exam</a></li>
+         <li><a href="<?=site_url('learning')?>">Learning</a></li>
+         <li><a href="<?=site_url('exam')?>">Exam</a></li>
 
          <?php if ($this->session->userdata('siswa_valid')==FALSE): ?>
-           <?php if ($this->uri->segment(2)=="login") { ?>
-             <li><a href="<?=site_url('url/register')?>">Regiter</a></li>
-           <?php } else if($this->uri->segment(2)=="register") { ?>
-             <li><a href="<?=site_url('url/login')?>">Login</a></li>
+           <?php if ($this->uri->segment(1)=="login") { ?>
+             <li><a href="<?=site_url('register')?>">Regiter</a></li>
+           <?php } else if($this->uri->segment(1)=="register") { ?>
+             <li><a href="<?=site_url('login')?>">Login</a></li>
            <?php } else { ?>
-             <li><a href="<?=site_url('url/login')?>">Login</a></li>
-             <li><a href="<?=site_url('url/register')?>">Regiter</a></li>
+             <li><a href="<?=site_url('login')?>">Login</a></li>
+             <li><a href="<?=site_url('register')?>">Regiter</a></li>
           <?php } ?>
          <?php endif; ?>
          <?php if ($this->session->userdata('siswa_valid')==TRUE) { ?>

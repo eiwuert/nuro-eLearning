@@ -11,7 +11,7 @@
           required: true,
           email: true,
           remote: {
-            url: "<?=base_url()?>/action/validateEmailExist",
+            url: "<?=base_url()?>/register/validateEmailExist",
             type: "post",
             data: {
               email: function() {
@@ -24,7 +24,7 @@
           required: true,
           minlength: 5,
           remote: {
-            url: "<?=base_url()?>/action/validateUsernameExist",
+            url: "<?=base_url()?>/register/validateUsernameExist",
             type: "post",
             data: {
               username: function() {
@@ -44,21 +44,21 @@
       messages: {
         nama: {
           required: "Nama harus diisi",
-          minlength: "Minimal nama harus 10 kata"
+          minlength: "Minimal nama harus 10 karakter"
         },
         email: {
           required: "Email harus diisi",
-          email: "Email harus dalam format alamat email",
-          remote: "Email telah diambil"
+          email: "Email harus diisi dalam format alamat email",
+          remote: "Email telah digunakan"
         },
         username: {
           required: "Username harus diisi",
-          minlength: "Minimal username harus 5 kata",
-          remote: "Username telah diambil"
+          minlength: "Minimal username harus 5 karakter",
+          remote: "Username telah digunakan"
         },
         password: {
           required: "Password harus diisi",
-          minlength: "Minimal password harus 5 kata"
+          minlength: "Minimal password harus 5 karakter"
         },
         image: {
           required: "Foto harus diisi"
@@ -82,7 +82,7 @@
        Student Register
      </div>
      <br>
-     <form id="regisv" action="<?=base_url('action/addUser')?>" method="post">
+     <form id="regisv" action="<?=base_url('register/addUser')?>" method="post">
        <!--   action="<?=base_url('action/cekLogin')?>" -->
        <?php if ($this->session->flashdata(md5('notification'))) { ?>
          <div class="" style="text-align:center;background-color:#ee6e73;width:100%;padding:10px;color:#fff">
@@ -117,14 +117,14 @@
 
       <div class="row">
         <div class="input-field col s12">
-          <input placeholder="Password" id="password" name="password" type="text" class="validate">
+          <input placeholder="Password" id="password" name="password" type="password" class="validate">
           <label for="password">Password</label>
         </div>
       </div>
 
       <div class="row">
         <div class="input-field col s12">
-          <select>
+          <select id="jurusan" name="jurusan">
             <option value="" disabled selected>Pilih Jurusan</option>
             <?php foreach ($jurusan as $data) { ?>
               <option value="<?=$data->id_jurusan;?>"><?=$data->jurusan;?></option>
@@ -136,11 +136,11 @@
 
       <div class="row">
         <div class="input-field col s12">
-          <select>
+          <select id="kelas" name="kelas">
             <option value="" disabled selected>Pilih Kelas</option>
-            <option value="1">10</option>
-            <option value="2">11</option>
-            <option value="3">12</option>
+            <?php foreach ($kelas as $data) { ?>
+              <option value="<?=$data->id_kelas;?>"><?=$data->kelas;?></option>
+            <?php } ?>
           </select>
           <label>Kelas</label>
         </div>

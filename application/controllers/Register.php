@@ -3,27 +3,23 @@
 /**
  *
  */
-class Action extends CI_Controller
+class Register extends CI_Controller
 {
-
   function __construct() {
     parent::__construct();
-    $this->load->helper(array('url','form'));
-    $this->load->library(array('email','session'));
+    $this->load->database();
+    $this->load->library(array('session','auth','email','twig'));
     $this->load->model('nurodigital');
+    $this->load->helper(array('nurodigital','url'));
   }
 
-  public function cekLogin() {
-    $username = trim(htmlentities($this->input->post('username', TRUE), ENT_QUOTES, 'utf-8'));
-    // mysqli_real_escape_string(trim(htmlentities($this->input->post('username', TRUE), ENT_QUOTES, 'utf-8')));
-    $password = md5(trim(htmlentities($this->input->post('password', TRUE), ENT_QUOTES, 'utf-8')));
-    // mysqli_real_escape_string(md5(trim(htmlentities($this->input->post('password', TRUE), ENT_QUOTES, 'utf-8'))));
-    $this->nurodigital->actLogin($username, $password);
-  }
-
-  public function dest() {
-    $this->session->sess_destroy();
-    redirect();
+  public function index() {
+    $data['title']  = "Register";
+    $data['st']     = "home";
+    $data['file']   = "register";
+    $data['jurusan']  = $this->nurodigital->getJurusan();
+    $data['kelas'] = $this->nurodigital->getKelas();
+    $this->nurodigital->getPage($data);
   }
 
   public function addUser() {
@@ -32,6 +28,8 @@ class Action extends CI_Controller
       'email'     => $this->input->post('email'),
       'username'  => $this->input->post('username'),
       'password'  => md5($this->input->post('password')),
+      'jurusan_id'=> $this->input->post('jurusan'),
+      'kelas_id'  => $this->input->post('kelas'),
       'image'     => $this->input->post('image')
     );
     //
@@ -40,10 +38,11 @@ class Action extends CI_Controller
         if ($this->nurodigital->prosesInsert($data)) {
           if ($this->nurodigital->send($this->input->post('email'),$this->input->post('nama'))) {
             $this->session->set_flashdata(md5('sukses'), "Anda berhasil melakukan registrasi, silahkan periksa pesan masuk email Anda untuk mengaktifkan akun yang baru Anda buat");
-            redirect('/url/login');
+            redirect('login');
           } else {
             $this->session->set_flashdata(md5('notification'), "Terjadi kesalahan dalam melakukan registrasi, silahkan coba lagi!");
-            redirect('/url/register');
+            $this->nurodigital->purgeRegister($data);
+            redirect('register');
             // show_error($this->email->print_debugger());
           }
         }
@@ -58,29 +57,13 @@ class Action extends CI_Controller
 
   }
 
-  function checkEmailExist($email) {
-    if ($this->nurodigital->checkEmail($email)==TRUE) {
-      return TRUE;
-    } else {
-      return FALSE;
-    }
-  }
-
-  function checkUsernameExist($username) {
-    if ($this->nurodigital->chechUsername($username)==TRUE) {
-      return TRUE;
-    } else {
-      return FALSE;
-    }
-  }
-
   function verify($hash=NULL) {
     if ($this->nurodigital->verifyEmail($hash)) {
       $this->session->set_flashdata(md5('sukses'), "Email sukses diverifikasi!");
-      redirect('/url/login');
+      redirect('login');
     } else {
       $this->session->set_flashdata(md5('notification'), "Email gagal terverifikasi");
-      redirect('/url/register');
+      redirect('register');
     }
   }
 

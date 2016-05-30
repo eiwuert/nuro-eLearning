@@ -1,6 +1,5 @@
 <?php
-
-  if ($file) {
+if ($file) {
     if (file_exists('application/views/home/pages/'.$file.'.php')==TRUE) {
       $this->load->view('home/pages/'.$file);
     } else {
@@ -9,5 +8,4 @@
   } else {
     echo "Halaman tidak ditemukan";
   }
-
 ?>

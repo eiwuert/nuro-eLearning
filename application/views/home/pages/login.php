@@ -15,11 +15,11 @@
       messages: {
         username :{
           required: "Username harus diisi",
-          minlength: "Harus lebih dari 5 karakter"
+          minlength: "Minimal username harus 5 karakter"
         },
         password: {
           required: "Password harus diisi",
-          minlength: "Harus lebih dari 5 karakter"
+          minlength: "Minimal password harus 5 karakter"
         }
       },
       errorElement: 'span',
@@ -41,7 +41,7 @@
      </div>
      <br>
      <div class="row">
-     <form id="loginv" class="col s12" action="<?=base_url('action/cekLogin')?>" method="post">
+     <form id="loginv" class="col s12" action="<?=base_url('siswa/cekLogin')?>" method="post">
        <!--   action="<?=base_url('action/cekLogin')?>" -->
        <?php if ($this->session->userdata(md5('notification'))) { ?>
          <div class="" style="text-align:center;background-color:#ee6e73;width:100%;padding:10px;color:#fff">

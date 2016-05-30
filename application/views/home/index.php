@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title><?=$title?> - e-Learning</title>
-    <link rel="stylesheet" href="<?=base_url('assets/materialize/css/ghpages-materialize.css')?>" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="<?=base_url('')?>assets/materialize/css/ghpages-materialize.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="<?=base_url('')?>assets/materialize/css/prism.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="<?=base_url('')?>assets/materialize/dist/css/materialize.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="<?=base_url('')?>assets/materialize/extras/noUiSlider/nouislider.css" media="screen" title="no title" charset="utf-8">

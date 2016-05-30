@@ -18,7 +18,7 @@ class Nurodigital extends CI_Model
     $r = $que->row();
 
     if ($n_row === 1) {
-      if ($r->status == "Aktif" /*&& $r->banned_stat == "N"*/) {
+      if ($r->banned_stat == "N" /*&& $r->banned_stat == "N"*/) {
         $this->sessionData($r);
       }
       // else if ($r->banned_stat == "Y") {
@@ -26,12 +26,12 @@ class Nurodigital extends CI_Model
       //   redirect('/url/login');
       // }
       else {
-        $this->session->set_flashdata(md5('notification'), "Akun Anda belum diverifikasi, silahkan verifikasi akun Anda terlebih dahulu");
-        redirect('/url/login');
+        $this->session->set_flashdata(md5('notification'), "Akun Anda telah dinonaktifkan oleh Administrator, silahkan hubungi bidang kesiswaan");
+        redirect('login');
       }
     } else {
       $this->session->set_flashdata(md5('notification'), "Username dan Password tidak terdaftar");
-      redirect('/url/login');
+      redirect('login');
     }
 
     // if ($n_row === 1) {
@@ -45,7 +45,9 @@ class Nurodigital extends CI_Model
 
   public function sessionData($r='') {
     $data['id']     = $r->id_siswa;
+    $data['email']  = $r->email;
     $data['nama']   = $r->nama;
+    $data['status'] = $r->status;
     $data['siswa_valid'] = TRUE;
 
     $this->session->set_userdata($data);
@@ -62,25 +64,6 @@ class Nurodigital extends CI_Model
     return $this->db->insert('nurodigital_siswa', $data);
   }
 
-  public function checkEmail($email) {
-    $query = $this->db->get_where('nurodigital_siswa', array('email' => $email));
-    $n_rows = $query->num_rows();
-    if ($n_rows === 0) {
-      return TRUE;
-    } else {
-      return FALSE;
-    }
-  }
-
-  public function chechUsername($username) {
-    $query = $this->db->get_where('nurodigital_siswa', array('username' => $username));
-    $n_rows = $query->num_rows();
-    if ($n_rows === 0) {
-      return TRUE;
-    } else {
-      return FALSE;
-    }
-  }
 
   // function sendMail($to_email) {
   //       $this->load->library('email');
@@ -113,9 +96,11 @@ class Nurodigital extends CI_Model
   public function send($email,$nama) {
     $from_email = 'ahmad.uji08@gmail.com';
     $subject = 'Verify Your Email Address';
+    $root = "http://".$_SERVER['HTTP_HOST'];
+    $root .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
     $message = 'Dear '. $nama .',<br /><br />
                 Please click on the below activation link to verify your email address.<br /><br />
-                http://localhost/ci/nuroe-learning/action/verify/' . md5($email) . '<br /><br /><br />
+                ' . $root . '/register/verify/' . md5($email) . '<br /><br /><br />
                 Thanks<br />
                 Ahmad Fauzi';
 
@@ -124,7 +109,7 @@ class Nurodigital extends CI_Model
     $config['smtp_timeout'] = '7';
     $config['smtp_port'] = '465';
     $config['smtp_user'] = $from_email;
-    $config['smtp_pass'] = 'password';
+    $config['smtp_pass'] = '081318260540';
     // $config['charset']    = 'utf-8';
     $config['mailtype'] = 'html';
     $config['charset'] = 'iso-8859-1';
@@ -142,6 +127,11 @@ class Nurodigital extends CI_Model
     return $this->email->send();
   }
 
+  function purgeRegister($data) {
+    $this->db->where($data);
+    $this->db->delete('siswa');
+  }
+
   function verifyEmail($key) {
     $data = array('status' => "Aktif");
     $this->db->where('md5(email)', $key);
@@ -153,28 +143,42 @@ class Nurodigital extends CI_Model
     return $query;
   }
 
-  function get_all_usernames($username) {
-    $this->db->select('username');
-    $this->db->where('username', $username);
-    $this->db->from('nurodigital_siswa', 1);
-    $query = $this->db->get();
-    if ($query->num_rows() > 0) {
-      return 0;
-    } else {
-      return 1;
-    }
+  public function getKelas() {
+    $query = $this->db->get("nurodigital_kelas")->result();
+    return $query;
   }
 
+  public function resendVerify($email,$nama) {
+    $from_email = 'ahmad.uji08@gmail.com';
+    $subject = 'Verify Your Email Address';
+    $root = "http://".$_SERVER['HTTP_HOST'];
+    $root .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+    $message = 'Dear '. $nama .',<br /><br />
+                Please click on the below activation link to verify your email address.<br /><br />
+                ' . $root . '/register/verify/' . md5($email) . '<br /><br /><br />
+                Thanks<br />
+                Ahmad Fauzi';
 
-    private function usernameexist($username)
-    {
-      $this->db->select('username');
-    	$this->db->where('username', $username);
-    	$query = $this->db->get('nurodigital_siswa');
-    	if( $query->num_rows() > 0 ) {
-        return TRUE;
-      } else {
-        return FALSE;
-      }
-    }
+    $config['protocol'] = 'smtp';
+    $config['smtp_host'] = 'ssl://smtp.gmail.com';
+    $config['smtp_timeout'] = '7';
+    $config['smtp_port'] = '465';
+    $config['smtp_user'] = $from_email;
+    $config['smtp_pass'] = '081318260540';
+    // $config['charset']    = 'utf-8';
+    $config['mailtype'] = 'html';
+    $config['charset'] = 'iso-8859-1';
+    $config['wordwrap'] = TRUE;
+    $config['newline'] = "\r\n";
+    $config['crlf'] = "\r\n";
+    // $config['newline'] = "\r\n"; //use double quotes
+    $this->email->initialize($config);
+
+    $this->email->from($from_email, 'nuroe-Learning');
+    $this->email->to($email);
+    $this->email->subject($subject);
+    $this->email->message($message);
+    // $this->email->print_debugger();
+    return $this->email->send();
+  }
 }
