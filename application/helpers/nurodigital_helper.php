@@ -6,7 +6,9 @@
 // }
 
 function siswa_valid() {
+  $CI =& get_instance();
   if (!is_login()) {
+    $CI->session->set_flashdata(md5('notification'), "Anda harus login terlebih dahulu");
     redirect('login');
     die;
   }

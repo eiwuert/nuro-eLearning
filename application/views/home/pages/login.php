@@ -36,10 +36,6 @@
 <br><br>
 <div class="container">
   <div class="card-panel hoverable" style="width:60%;margin:0 auto;">
-     <div class="">
-       Student Login Area
-     </div>
-     <br>
      <div class="row">
      <form id="loginv" class="col s12" action="<?=base_url('siswa/cekLogin')?>" method="post">
        <!--   action="<?=base_url('action/cekLogin')?>" -->

@@ -36,4 +36,22 @@
         </li>
       </ul>
     </div>
+    <br><br>
+    <div class="news">
+      <div class="title-section">
+        Portal Berita
+      </div>
+      <div class="content-section">
+        <a href="#">
+          <div class="news-title">
+            Siswa ketauan mencontek
+          </div>
+        </a>
+        <div class="news-content">
+          Seorang siswa kepergok membuka google saat ujian berlangsung,
+          siswa tersebut langsung di bunuh di tempat oleh guru killer nomer 1 di sekolah
+        </div>
+      </div>
+    </div>
 </div>
+<br><br>

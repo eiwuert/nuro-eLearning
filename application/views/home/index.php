@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="<?=base_url('')?>assets/materialize/css/prism.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="<?=base_url('')?>assets/materialize/dist/css/materialize.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="<?=base_url('')?>assets/materialize/extras/noUiSlider/nouislider.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="<?=base_url('')?>assets/css/news.css" media="screen" title="no title" charset="utf-8">
     <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>

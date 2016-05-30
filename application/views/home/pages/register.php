@@ -78,10 +78,6 @@
 <br><br>
 <div class="container">
    <div class="card-panel hoverable" style="width:60%;margin:0 auto;">
-     <div class="">
-       Student Register
-     </div>
-     <br>
      <form id="regisv" action="<?=base_url('register/addUser')?>" method="post">
        <!--   action="<?=base_url('action/cekLogin')?>" -->
        <?php if ($this->session->flashdata(md5('notification'))) { ?>
@@ -162,7 +158,7 @@
 
         <span style="">
           <input type="checkbox" id="test5" />
-          <label for="test5">Remember Me!</label>
+          <label for="test5">Ingat Saya!</label>
         </span>
 
      </form>

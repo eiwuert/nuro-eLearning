@@ -1,0 +1,23 @@
+.news {
+  width: 100%;
+  border: solid 1px #ccc;
+}
+
+.title-section {
+  background: #ee6e73;
+  color: #fff;
+  padding: 10px;
+  border: solid 1px #ee6e73;
+}
+
+.content-section {
+  padding: 10px;
+}
+
+.news-title {
+  font-weight: bold;
+}
+
+.news-content {
+
+}

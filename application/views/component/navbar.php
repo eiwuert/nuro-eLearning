@@ -10,9 +10,9 @@
        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
        <ul class="right hide-on-med-and-down">
          <li class="waves-effect"><a href="<?=base_url('')?>">Home</a></li>
-         <li><a href="<?=site_url('learning')?>">Learning</a></li>
-         <li><a href="<?=site_url('exam')?>">Exam</a></li>
-
+         <li><a href="<?=site_url('learning')?>">Belajar</a></li>
+         <li><a href="<?=site_url('exam')?>">Ujian</a></li>
+         <li><a href="<?=site_url('forum')?>">Forum</a></li>
          <?php if ($this->session->userdata('siswa_valid')==FALSE): ?>
            <?php if ($this->uri->segment(1)=="login") { ?>
              <li><a href="<?=site_url('register')?>">Regiter</a></li>
