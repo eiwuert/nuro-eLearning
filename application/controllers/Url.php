@@ -14,6 +14,7 @@ class Url extends CI_Controller
   }
 
   public function learning() {
+    siswa_valid();
     $data['title']  = "eLearning";
     $data['st']     = 'home';
     $data['file']   = 'learning';
@@ -21,14 +22,15 @@ class Url extends CI_Controller
   }
 
   public function exam() {
-    if (!$this->session->userdata('siswa_valid')) {
-      redirect('/url/login');
-    } else {
+    siswa_valid();
+    // if (!$this->session->userdata('siswa_valid')) {
+    //   redirect('/url/login');
+    // } else {
       $data['title']  = "Online Exam";
       $data['st']     = "home";
       $data['file']   = "exam";
       $this->nurodigital->getPage($data);
-    }
+    // }
   }
 
   public function login() {
