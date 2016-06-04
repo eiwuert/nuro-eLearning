@@ -111,7 +111,7 @@ class Nurodigital extends CI_Model
     $config['smtp_timeout'] = '7';
     $config['smtp_port'] = '465';
     $config['smtp_user'] = $from_email;
-    $config['smtp_pass'] = '081318260540';
+    $config['smtp_pass'] = 'pass';
     // $config['charset']    = 'utf-8';
     $config['mailtype'] = 'html';
     $config['charset'] = 'iso-8859-1';
@@ -166,7 +166,7 @@ class Nurodigital extends CI_Model
     $config['smtp_timeout'] = '7';
     $config['smtp_port'] = '465';
     $config['smtp_user'] = $from_email;
-    $config['smtp_pass'] = '081318260540';
+    $config['smtp_pass'] = 'pass';
     // $config['charset']    = 'utf-8';
     $config['mailtype'] = 'html';
     $config['charset'] = 'iso-8859-1';
