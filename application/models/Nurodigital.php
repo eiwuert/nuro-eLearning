@@ -13,7 +13,9 @@ class Nurodigital extends CI_Model
   }
 
   public function actLogin($username, $password) {
-    $que = $this->db->get_where('nurodigital_siswa', array('username' => $username, 'password' => $password));
+    $this->db->where("username = '$username' or email = '$username'");
+    $this->db->where('password', $password);
+    $que = $this->db->get('siswa');
     $n_row = $que->num_rows();
     $r = $que->row();
 
@@ -61,7 +63,7 @@ class Nurodigital extends CI_Model
     $id = $this->uuid->v4();
     $id = str_replace('-','',$this->uuid->v4());
     $this->db->set('id_siswa', $id);
-    return $this->db->insert('nurodigital_siswa', $data);
+    return $this->db->insert('siswa', $data);
   }
 
 
@@ -135,16 +137,16 @@ class Nurodigital extends CI_Model
   function verifyEmail($key) {
     $data = array('status' => "Aktif");
     $this->db->where('md5(email)', $key);
-    return $this->db->update('nurodigital_siswa', $data);
+    return $this->db->update('siswa', $data);
   }
 
   public function getJurusan() {
-    $query = $this->db->get("nurodigital_jurusan")->result();
+    $query = $this->db->get("jurusan")->result();
     return $query;
   }
 
   public function getKelas() {
-    $query = $this->db->get("nurodigital_kelas")->result();
+    $query = $this->db->get("kelas")->result();
     return $query;
   }
 

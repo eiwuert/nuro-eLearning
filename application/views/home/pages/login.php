@@ -14,7 +14,7 @@
       },
       messages: {
         username :{
-          required: "Username harus diisi",
+          required: "Username atau Email harus diisi",
           minlength: "Minimal username harus 5 karakter"
         },
         password: {
@@ -53,7 +53,7 @@
        <div class="row">
         <div class="input-field col s12">
           <input id="username" name="username" type="text" class="validate">
-          <label for="username" data-error="wrong">Username</label>
+          <label for="username" data-error="wrong">Username atau Email</label>
           <span id="error"></span>
         </div>
       </div>
