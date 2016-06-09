@@ -1,32 +1,5 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $("#loginv").validate({
-      rules: {
-        username: {
-          required: true,
-          minlength: 5
-        },
-        password: {
-          required: true,
-          minlength: 5
-        }
-      },
-      messages: {
-        username :{
-          required: "Username atau Email harus diisi",
-          minlength: "Minimal username harus 5 karakter"
-        },
-        password: {
-          required: "Password harus diisi",
-          minlength: "Minimal password harus 5 karakter"
-        }
-      },
-      errorElement: 'span',
-      errorLabelContainer: '.error'
-    });
-  });
-</script>
+<script type="text/javascript" src="<?=base_url('')?>assets/js/validate.js"></script>
 <style media="screen">
   .error {
     color: red;

@@ -41,4 +41,17 @@ function akunAktif() {
   return false;
 }
 
+function get_path_image($img = '', $size = '')
+{
+    if (empty($size)) {
+        return './assets/img/profile/'.$img;
+    } else {
+        $pisah = explode('.', $img);
+        $ext = end($pisah);
+        $nama_file = $pisah[0];
+
+        return './assets/foto/profile/'.$nama_file.'_'.$size.'.'.$ext;
+    }
+}
+
 ?>

@@ -10,7 +10,7 @@ class Home extends CI_Controller
     $this->load->database();
     $this->load->library(array('session','auth','email','twig'));
     $this->load->model('nurodigital');
-    $this->load->helper(array('nurodigital','url'));
+    $this->load->helper(array('nurodigital','url','date'));
     statusAkun();
   }
 
@@ -18,6 +18,7 @@ class Home extends CI_Controller
     $data['title']  = "Home";
     $data['st']     = "home";
     $data['file']   = "home";
+    $data['news']   = $this->nurodigital->getNews();
     $this->nurodigital->getPage($data);
   }
 }

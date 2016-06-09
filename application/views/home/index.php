@@ -11,7 +11,6 @@
     <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <!-- <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> -->
     <!-- <script>
       window.liveSettings = {
         api_key: "a0b49b34b93844c38eaee15690d86413",

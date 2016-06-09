@@ -1,74 +1,5 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $("#regisv").validate({
-      rules: {
-        nama: {
-          required: true,
-          minlength: 10
-        },
-        email: {
-          required: true,
-          email: true,
-          remote: {
-            url: "<?=base_url()?>/register/validateEmailExist",
-            type: "post",
-            data: {
-              email: function() {
-                return $("#email").val();
-              }
-            }
-          }
-        },
-        username: {
-          required: true,
-          minlength: 5,
-          remote: {
-            url: "<?=base_url()?>/register/validateUsernameExist",
-            type: "post",
-            data: {
-              username: function() {
-                return $("#username").val();
-              }
-            }
-          }
-        },
-        password: {
-          required: true,
-          minlength: 5
-        },
-        image: {
-          required: true
-        }
-      },
-      messages: {
-        nama: {
-          required: "Nama harus diisi",
-          minlength: "Minimal nama harus 10 karakter"
-        },
-        email: {
-          required: "Email harus diisi",
-          email: "Email harus diisi dalam format alamat email",
-          remote: "Email telah digunakan"
-        },
-        username: {
-          required: "Username harus diisi",
-          minlength: "Minimal username harus 5 karakter",
-          remote: "Username telah digunakan"
-        },
-        password: {
-          required: "Password harus diisi",
-          minlength: "Minimal password harus 5 karakter"
-        },
-        image: {
-          required: "Foto harus diisi"
-        }
-      },
-      errorElement: 'span',
-      errorLabelContainer: '.error'
-    });
-  });
-</script>
+<script type="text/javascript" src="<?=base_url('')?>assets/js/validate.js"></script>
 <style media="screen">
   .error {
     font-size: 12px;
@@ -78,7 +9,13 @@
 <br><br>
 <div class="container">
    <div class="card-panel hoverable" style="width:60%;margin:0 auto;">
-     <form id="regisv" action="<?=base_url('register/addUser')?>" method="post">
+     <!-- <form id="regisv" action="<?=base_url('register/addUser')?>" method="post"> -->
+     <?php
+      $attributes = array(
+        'id'  => 'regisv'
+      );
+     ?>
+     <?=form_open_multipart('register/addUser', $attributes) ?>
        <!--   action="<?=base_url('action/cekLogin')?>" -->
        <?php if ($this->session->flashdata(md5('notification'))) { ?>
          <div class="" style="text-align:center;background-color:#ee6e73;width:100%;padding:10px;color:#fff">

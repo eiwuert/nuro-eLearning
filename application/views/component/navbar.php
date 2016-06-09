@@ -1,6 +1,6 @@
 <div class="navbar-fixed">
   <ul id="dropdown1" class="dropdown-content">
-   <li><a href="<?=site_url('siswa/setting/')?>/<?=$this->session->userdata('id')?>">Setting</a></li>
+   <li><a href="<?=site_url('siswa/setting/')?>">Setting</a></li>
    <li><a href="<?=site_url('siswa/dest')?>">Logout</a></li>
   </ul>
    <nav>

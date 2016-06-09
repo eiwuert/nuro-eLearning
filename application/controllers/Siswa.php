@@ -20,7 +20,7 @@ class Siswa extends CI_Controller
   public function cekLogin() {
     $username = trim(htmlentities($this->input->post('username', TRUE), ENT_QUOTES, 'utf-8'));
     // mysqli_real_escape_string(trim(htmlentities($this->input->post('username', TRUE), ENT_QUOTES, 'utf-8')));
-    $password = md5(trim(htmlentities($this->input->post('password', TRUE), ENT_QUOTES, 'utf-8')));
+    $password = password_hash(md5(sha1(base64_encode(trim(htmlentities($this->input->post('password', TRUE), ENT_QUOTES, 'utf-8'))))), PASSWORD_BCRYPT);
     // mysqli_real_escape_string(md5(trim(htmlentities($this->input->post('password', TRUE), ENT_QUOTES, 'utf-8'))));
     $this->nurodigital->actLogin($username, $password);
   }
@@ -45,5 +45,13 @@ class Siswa extends CI_Controller
       redirect('/login');
     }
     redirect('login');
+  }
+
+  public function setting() {
+    $data['title']  = "Account Setting";
+    $data['st']     = "home";
+    $data['file']   = "setting";
+    $data['getUser']= $this->nurodigital->getUser();
+    $this->nurodigital->getPage($data);
   }
 }

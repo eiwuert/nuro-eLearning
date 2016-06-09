@@ -1,8 +1,74 @@
 <style media="screen">
-  h3, h5 {
-    text-shadow: 1px 1px #333333;
-  }
+h3, h5 {
+  text-shadow: 1px 1px #333333;
+}
 </style>
+<?php
+
+function time_elapsed_string($datetime, $full = false) {
+  $today = time();
+  $createdday= strtotime($datetime);
+  $datediff = abs($today - $createdday);
+  $difftext="";
+  $years = floor($datediff / (365*60*60*24));
+  $months = floor(($datediff - $years * 365*60*60*24) / (30*60*60*24));
+  $days = floor(($datediff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+  $hours= floor($datediff/3600);
+  $minutes= floor($datediff/60);
+  $seconds= floor($datediff);
+  //year checker
+  if($difftext=="")
+  {
+    if($years>1)
+     $difftext=$years." years ago";
+    elseif($years==1)
+     $difftext=$years." year ago";
+  }
+  //month checker
+  if($difftext=="")
+  {
+     if($months>1)
+     $difftext=$months." months ago";
+     elseif($months==1)
+     $difftext=$months." month ago";
+  }
+  //month checker
+  if($difftext=="")
+  {
+     if($days>1)
+     $difftext=$days." days ago";
+     elseif($days==1)
+     $difftext=$days." day ago";
+  }
+  //hour checker
+  if($difftext=="")
+  {
+     if($hours>1)
+     $difftext=$hours." hours ago";
+     elseif($hours==1)
+     $difftext=$hours." hour ago";
+  }
+  //minutes checker
+  if($difftext=="")
+  {
+     if($minutes>1)
+     $difftext=$minutes." minutes ago";
+     elseif($minutes==1)
+     $difftext=$minutes." minute ago";
+  }
+  //seconds checker
+  if($difftext=="")
+  {
+     if($seconds>1)
+     $difftext=$seconds." seconds ago";
+     elseif($seconds==1)
+     $difftext=$seconds." second ago";
+  }
+  return $difftext;
+}
+
+?>
+<script type="text/javascript" src="http://timeago.yarp.com/jquery.timeago.js"></script>
 <div class="container">
   <div class="slider">
       <ul class="slides">
@@ -42,16 +108,29 @@
         Portal Berita
       </div>
       <div class="content-section">
+        <?php foreach ($news->result() as $news) { ?>
         <a href="#">
           <div class="news-title">
-            Siswa ketauan mencontek
+            <?=$news->title?>
           </div>
         </a>
         <div class="news-content">
-          Seorang siswa kepergok membuka google saat ujian berlangsung,
-          siswa tersebut langsung di bunuh di tempat oleh guru killer nomer 1 di sekolah
+          <?=$news->content?>
         </div>
+        <div class="">
+          <?php
+          echo time();
+          echo "<br>";
+          echo time_elapsed_string($news->post_at);
+          ?>
+        </div>
+        <?php } ?>
       </div>
     </div>
 </div>
 <br><br>
+<script type="text/javascript">
+  jQuery(document).ready(function() {
+    jQuery("time.timeago").timeago();
+  });
+</script>
